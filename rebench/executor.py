@@ -449,7 +449,7 @@ class Executor(object):
 
         try:
             self._ui.debug_output_info("{ind}Starting run\n", run_id, cmdline)
-
+            self._ui._output_detail_header(run_id, cmdline, run_id.location)
             def _keep_alive(seconds):
                 self._ui.warning(
                     "Keep alive. current job runs since %dmin\n" % (seconds / 60), run_id, cmdline)

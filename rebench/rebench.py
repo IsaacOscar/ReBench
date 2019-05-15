@@ -215,6 +215,7 @@ Argument:
             raise UIError(exc.message + "\n", exc)
 
         runs = self._config.get_runs()
+        self._ui.output("Performing %s runs", len(runs))
         data_store.load_data(runs, self._config.options.do_rerun)
         return self.execute_experiment(runs)
 
@@ -233,6 +234,9 @@ Argument:
                             self._config.build_log)
 
         if self._config.options.no_execution:
+            for r in runs:
+                self._ui._output_detail_header(r, r.cmdline(), r.location)
+
             return True
         else:
             return executor.execute()
